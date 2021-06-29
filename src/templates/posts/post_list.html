@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+    {% for object in object_list %}
+        <div class="col-4">
+        <!--{{ object.title }}-->
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="{{ object.thumbnail.url }}" class="img-fluid rounded-start" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <a href="{{ object.get_absolute_url }}">
+                  <h5 class="card-title">{{ object.title }}</h5>
+                  </a>
+                  <p class="card-text">{{ object.content|truncatechars:9  }}</p>
+                  <!--<p class="card-text"><small class="text-muted">{{ object.publish_date }}</small></p>-->
+                  <p>
+                      <span><i class="fas fa-thumbs-up ml-3"> </i>{{ object.get_like_count }}</span>
+                      <span><i class="fas fa-eye ml-3"> </i>{{ object.get_view_count }}</span>
+                      <span><i class="fas fa-comments ml-3"> </i>{{ object.get_comment_count }}</span>
+                  </p>
+                  <p class="cardd-text">
+                      Posted {{ object.publish_date|timesince }} ago
+
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          </a>
+        </div>
+    {% endfor %}
+        </div>
+    </div>
+{% endblock content %}
